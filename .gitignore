@@ -1,0 +1,60 @@
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Code quality
+.ruff_cache/
+.mypy_cache/
+
+# Logs
+*.log
+logs/
+
+# Generated data
+data/generated/*
+!data/generated/.gitkeep
+
+data/lake/*
+!data/lake/.gitkeep
+
+# Credentials
+credentials/
+secrets/
+*.pem
+*.key
+service-account*.json
+
+# dbt
+dbt/target/
+dbt/logs/
+dbt/dbt_packages/
+dbt/profiles.yml
+
+# Airflow
+airflow/logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
