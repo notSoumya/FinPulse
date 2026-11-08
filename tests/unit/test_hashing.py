@@ -1,10 +1,10 @@
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from decimal import Decimal
 
 from finpulse.common.hashing import (
-    generate_transaction_id,
     generate_payload_hash,
+    generate_transaction_id,
 )
 
 
@@ -13,7 +13,7 @@ def test_transaction_id_is_deterministic():
         "user_001",
         "UPI_CSV",
         Decimal("500.00"),
-        datetime(2026, 11, 7, tzinfo=timezone.utc),
+        datetime(2026, 11, 7, tzinfo=UTC),
         "DEBIT",
     )
 
@@ -28,7 +28,7 @@ def test_different_reference_ids_produce_different_ids():
         "user_001",
         "UPI_CSV",
         Decimal("500.00"),
-        datetime(2026, 11, 7, tzinfo=timezone.utc),
+        datetime(2026, 11, 7, tzinfo=UTC),
         "DEBIT",
     )
 

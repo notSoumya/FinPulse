@@ -1,5 +1,5 @@
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from decimal import Decimal
 
 import pytest
@@ -15,7 +15,7 @@ def sample_transaction():
         "amount": Decimal("500.00"),
         "currency": "INR",
         "direction": "DEBIT",
-        "transaction_timestamp": datetime.now(timezone.utc),
+        "transaction_timestamp": datetime.now(UTC),
         "merchant_raw": "Amazon Pay",
         "merchant_normalized": "AMAZON PAY",
         "reference_id": "REF12345",
