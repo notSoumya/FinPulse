@@ -1,0 +1,5 @@
+
+date,amount,type,merchant,reference_id,currency
+2026-11-07 12:30:00,500.00,DR,Amazon,UPI123,INR
+2026-11-07 14:00:00,1200.00,CR,Salary,UPI124,INR
+2026-11-08 10:15:00,250.50,DR,Swiggy,UPI125,INR
