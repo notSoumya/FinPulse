@@ -1,10 +1,9 @@
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from decimal import Decimal
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
-
 
 SourceType = Literal[
     "BANK_SMS",
@@ -46,7 +45,7 @@ class Transaction(BaseModel):
         if value.tzinfo is None or value.utcoffset() is None:
             raise ValueError("Timestamp must include timezone information")
 
-        return value.astimezone(timezone.utc)
+        return value.astimezone(UTC)
 
     @field_validator("currency")
     @classmethod
