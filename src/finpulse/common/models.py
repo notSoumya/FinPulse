@@ -56,3 +56,23 @@ class Transaction(BaseModel):
             raise ValueError("Currency must be a 3-letter code")
 
         return value
+        
+class SilverTransaction(Transaction):
+    """
+    Cleaned and standardized transaction representation
+    stored in the Silver layer.
+    """
+
+    deduplication_key: str = Field(min_length=1)
+    processed_at: datetime
+    schema_version: str = "1.0"
+
+    @field_validator("processed_at")
+    @classmethod
+    def validate_processed_at(cls, value: datetime) -> datetime:
+        if value.tzinfo is None or value.utcoffset() is None:
+            raise ValueError(
+                "processed_at must include timezone information"
+            )
+
+        return value.astimezone(UTC)
