@@ -36,6 +36,8 @@ lake = [
 ]
 
 warehouse = [
+    "duckdb>=1.1",
+    "dbt-duckdb>=1.8",
     "google-cloud-bigquery>=3.26",
     "dbt-bigquery>=1.8",
 ]

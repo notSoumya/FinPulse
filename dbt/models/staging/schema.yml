@@ -1,0 +1,47 @@
+version: 2
+
+sources:
+  - name: silver
+    schema: silver
+    description: "Curated transactions synced from Phase 6 Delta Lake storage."
+    tables:
+      - name: transactions
+        description: "Silver transaction events."
+        columns:
+          - name: transaction_id
+            tests:
+              - not_null
+              - unique
+          - name: user_id
+            tests:
+              - not_null
+          - name: amount
+            tests:
+              - not_null
+          - name: direction
+            tests:
+              - not_null
+              - accepted_values:
+                  arguments:
+                    values: ['DEBIT', 'CREDIT']
+
+models:
+  - name: stg_transactions
+    description: "Standardized staging model for transactions with calendar dimensions and typing guarantees."
+    columns:
+      - name: transaction_id
+        tests:
+          - not_null
+          - unique
+      - name: user_id
+        tests:
+          - not_null
+      - name: amount
+        tests:
+          - not_null
+      - name: direction
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['DEBIT', 'CREDIT']
