@@ -29,7 +29,7 @@ It establishes a shared canonical data contract across services, streams events 
 | **Phase 6** | Silver Processing Layer | Bronze reader, validation, cleaner, deduplicator, Delta Lake writer | **Completed** |
 | **Phase 7** | Warehouse Architecture & Modeling | DuckDB warehouse, dbt-duckdb transformations, Gold Marts, pipeline runner | **Completed** |
 | **Phase 8** | Workflow Orchestration | Apache Airflow DAGs for automated batch pipeline scheduling, retries, quality validation | **Completed** |
-| **Phase 9** | Intelligence & Visualizations | ML anomaly detection and Streamlit personal finance dashboard | **Next Planned Phase** |
+| **Phase 9** | Financial Analytics Dashboard | Interactive Streamlit + Plotly financial dashboard, multi-page analytics, read-only DuckDB | **Completed** |
 
 ---
 
@@ -206,11 +206,18 @@ docker compose -f docker-compose.airflow.yml up -d
 ```
 Access the Airflow UI at `http://localhost:8080` (credentials: `admin` / `admin`) to trigger or monitor `finpulse_end_to_end_pipeline`.
 
+### Step 7: Launch Financial Analytics Dashboard
+Launch the interactive Streamlit + Plotly financial dashboard:
+```bash
+streamlit run dashboard/app.py
+```
+Open `http://localhost:8501` to explore spending, counterparty analytics, cash flow trajectories, and transaction ledgers.
+
 ---
 
 ## 🧪 Testing & Verification
 
-Run the full automated test suite (148 tests across unit, integration, and DAG verification):
+Run the full automated test suite (173 tests across unit, integration, DAG, and dashboard verification):
 ```bash
 pytest -v
 ```
