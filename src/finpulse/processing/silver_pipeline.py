@@ -1,4 +1,3 @@
-
 import logging
 from datetime import UTC, datetime
 from typing import Any
@@ -41,18 +40,14 @@ class SilverPipeline:
             "amount": str(transaction.amount),
             "currency": transaction.currency,
             "direction": transaction.direction,
-            "transaction_timestamp": (
-                transaction.transaction_timestamp.isoformat()
-            ),
+            "transaction_timestamp": (transaction.transaction_timestamp.isoformat()),
             "merchant_normalized": (
                 transaction.merchant_normalized.casefold()
                 if transaction.merchant_normalized
                 else None
             ),
             "reference_id": (
-                transaction.reference_id.strip().upper()
-                if transaction.reference_id
-                else None
+                transaction.reference_id.strip().upper() if transaction.reference_id else None
             ),
         }
 
@@ -68,17 +63,10 @@ class SilverPipeline:
         for record in records:
             try:
                 transactions.append(
-                    Transaction.model_validate(
-                        {
-                            key: record[key]
-                            for key in transaction_fields
-                        }
-                    )
+                    Transaction.model_validate({key: record[key] for key in transaction_fields})
                 )
             except (KeyError, ValueError):
-                logger.exception(
-                    "Could not load an existing Silver transaction"
-                )
+                logger.exception("Could not load an existing Silver transaction")
 
         return transactions
 
@@ -91,9 +79,7 @@ class SilverPipeline:
             "transactions_quarantined": 0,
         }
 
-        existing_transactions = self._load_existing_transactions(
-            self.silver_writer.read_all()
-        )
+        existing_transactions = self._load_existing_transactions(self.silver_writer.read_all())
 
         # Track event IDs encountered during this pipeline run.
         seen_event_ids: set[str] = set()
@@ -104,9 +90,7 @@ class SilverPipeline:
             event_id = event.get("event_id")
 
             if not isinstance(event_id, str) or not event_id.strip():
-                logger.error(
-                    "Bronze event has no valid event_id; cannot checkpoint"
-                )
+                logger.error("Bronze event has no valid event_id; cannot checkpoint")
                 self.quarantine_manager.quarantine_record(
                     event,
                     ["Missing or invalid event_id"],
@@ -157,15 +141,10 @@ class SilverPipeline:
             try:
                 transaction = clean_transaction(transaction)
 
-                transaction = (
-                    self.merchant_normalizer.normalize_transaction(
-                        transaction
-                    )
-                )
+                transaction = self.merchant_normalizer.normalize_transaction(transaction)
 
                 duplicate_found = any(
-                    is_duplicate(transaction, existing)
-                    for existing in existing_transactions
+                    is_duplicate(transaction, existing) for existing in existing_transactions
                 )
 
                 if duplicate_found:
@@ -173,9 +152,7 @@ class SilverPipeline:
                     stats["duplicates_skipped"] += 1
                     continue
 
-                deduplication_key = (
-                    self._generate_deduplication_key(transaction)
-                )
+                deduplication_key = self._generate_deduplication_key(transaction)
 
                 silver_transaction = SilverTransaction(
                     **transaction.model_dump(),
@@ -198,9 +175,7 @@ class SilverPipeline:
                 stats["transactions_quarantined"] += 1
                 continue
 
-            written = self.silver_writer.write(
-                [silver_transaction]
-            )
+            written = self.silver_writer.write([silver_transaction])
 
             self.checkpoint_manager.mark_processed(event_id)
 

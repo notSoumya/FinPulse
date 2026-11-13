@@ -1,4 +1,3 @@
-
 import re
 from datetime import UTC, datetime
 from decimal import Decimal
@@ -8,9 +7,7 @@ import pdfplumber
 from finpulse.common.hashing import generate_transaction_id
 from finpulse.common.models import Transaction
 
-TRANSACTION_PATTERN = re.compile(
-    r"(\d{2}-\d{2}-\d{4})\s+(.+?)\s+([0-9,]+\.\d{2})"
-)
+TRANSACTION_PATTERN = re.compile(r"(\d{2}-\d{2}-\d{4})\s+(.+?)\s+([0-9,]+\.\d{2})")
 
 
 def extract_pdf_text(file_path: str) -> str:
@@ -24,9 +21,7 @@ def extract_pdf_text(file_path: str) -> str:
     text = "\n".join(pages)
 
     if not text.strip():
-        raise ValueError(
-            "No selectable text found. PDF may require OCR."
-        )
+        raise ValueError("No selectable text found. PDF may require OCR.")
 
     return text
 
@@ -50,9 +45,7 @@ def parse_card_pdf(
 
         date_str, merchant, amount_str = match.groups()
 
-        timestamp = datetime.strptime(
-            date_str, "%d-%m-%Y"
-        ).replace(tzinfo=UTC)
+        timestamp = datetime.strptime(date_str, "%d-%m-%Y").replace(tzinfo=UTC)
 
         amount = Decimal(amount_str.replace(",", ""))
         merchant = merchant.strip()

@@ -72,4 +72,3 @@ def test_transaction_direction_filter(populated_duckdb):
     )
     assert total_debits == 3
     assert total_credits == 1
-

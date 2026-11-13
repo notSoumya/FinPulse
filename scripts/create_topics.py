@@ -1,4 +1,3 @@
-
 import logging
 import time
 
@@ -21,13 +20,9 @@ logger = logging.getLogger(__name__)
 
 
 def create_topics():
-    admin = AdminClient({
-        "bootstrap.servers": BOOTSTRAP_SERVERS
-    })
+    admin = AdminClient({"bootstrap.servers": BOOTSTRAP_SERVERS})
 
-    topic_names = list(dict.fromkeys(
-        list(TOPICS.values()) + list(DLQ_TOPICS.values())
-    ))
+    topic_names = list(dict.fromkeys(list(TOPICS.values()) + list(DLQ_TOPICS.values())))
 
     for attempt in range(1, MAX_ATTEMPTS + 1):
         try:
@@ -42,10 +37,7 @@ def create_topics():
             existing_topics = set(metadata.topics.keys())
 
             # Identify only missing topics
-            missing_topics = [
-                topic for topic in topic_names
-                if topic not in existing_topics
-            ]
+            missing_topics = [topic for topic in topic_names if topic not in existing_topics]
 
             if not missing_topics:
                 logger.info("All 8 Kafka topics already exist.")
@@ -87,9 +79,7 @@ def create_topics():
             logger.info("Retrying in %s seconds...", RETRY_DELAY)
             time.sleep(RETRY_DELAY)
 
-    raise RuntimeError(
-        "Kafka topic initialization failed after all retry attempts."
-    )
+    raise RuntimeError("Kafka topic initialization failed after all retry attempts.")
 
 
 if __name__ == "__main__":

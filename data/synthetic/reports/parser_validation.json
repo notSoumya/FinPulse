@@ -1,0 +1,54 @@
+{
+  "timestamp": "2026-11-13T23:54:14.613904",
+  "parsers": {
+    "upi": {
+      "parser": "parse_upi_csv",
+      "file": "data\\synthetic\\raw\\upi\\upi_transactions.csv",
+      "valid_count_expected": 40,
+      "valid_count_parsed": 40,
+      "checks": {
+        "record_count_matches": true,
+        "field_extraction_accuracy": true,
+        "empty_csv_handled": true,
+        "missing_columns_rejected": true
+      },
+      "status": "PASS"
+    },
+    "card": {
+      "parser": "parse_card_pdf",
+      "file": "data\\synthetic\\raw\\card\\card_statement.pdf",
+      "valid_count_expected": 35,
+      "valid_count_parsed": 35,
+      "checks": {
+        "internal_deduplication_verified": true,
+        "field_extraction_accuracy": true
+      },
+      "status": "PASS"
+    },
+    "bank_sms": {
+      "parser": "parse_bank_sms",
+      "file": "data\\synthetic\\raw\\bank_sms\\bank_sms.json",
+      "valid_count_expected": 25,
+      "valid_count_parsed": 25,
+      "checks": {
+        "all_valid_sms_parsed": true,
+        "direction_and_amount_accuracy": true,
+        "edge_cases_rejected_properly": true
+      },
+      "status": "PASS"
+    },
+    "manual": {
+      "parser": "parse_manual",
+      "file": "data\\synthetic\\raw\\manual\\manual_transactions.json",
+      "valid_count_expected": 20,
+      "valid_count_parsed": 20,
+      "checks": {
+        "all_valid_manual_parsed": true,
+        "field_extraction_accuracy": true,
+        "edge_cases_rejected_properly": true
+      },
+      "status": "PASS"
+    }
+  },
+  "overall_status": "PASS"
+}

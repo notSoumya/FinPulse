@@ -45,4 +45,3 @@ def test_calculate_avg_ticket():
     assert calculate_avg_ticket(2500, 5) == 500.0
     assert calculate_avg_ticket(100, 0) is None
     assert calculate_avg_ticket(0, 10) == 0.0
-

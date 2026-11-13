@@ -1,4 +1,3 @@
-
 from unittest.mock import MagicMock, patch
 
 import fitz
@@ -37,9 +36,7 @@ def create_mock_producer():
 
 
 def test_health_endpoint():
-    with patch(
-        "finpulse.ingestion.main.KafkaTransactionProducer"
-    ) as mock_class:
+    with patch("finpulse.ingestion.main.KafkaTransactionProducer") as mock_class:
         mock_class.return_value = create_mock_producer()
 
         with TestClient(app) as client:
@@ -50,9 +47,7 @@ def test_health_endpoint():
 
 
 def test_manual_transaction_endpoint():
-    with patch(
-        "finpulse.ingestion.main.KafkaTransactionProducer"
-    ) as mock_class:
+    with patch("finpulse.ingestion.main.KafkaTransactionProducer") as mock_class:
         mock_class.return_value = create_mock_producer()
 
         with TestClient(app) as client:
@@ -77,9 +72,7 @@ def test_manual_transaction_endpoint():
 
 
 def test_sms_endpoint():
-    with patch(
-        "finpulse.ingestion.main.KafkaTransactionProducer"
-    ) as mock_class:
+    with patch("finpulse.ingestion.main.KafkaTransactionProducer") as mock_class:
         mock_class.return_value = create_mock_producer()
 
         with TestClient(app) as client:
@@ -105,9 +98,7 @@ def test_upi_csv_upload():
         "2026-11-07 14:00:00,5000.00,CR,Salary,UPI003,INR\n"
     )
 
-    with patch(
-        "finpulse.ingestion.main.KafkaTransactionProducer"
-    ) as mock_class:
+    with patch("finpulse.ingestion.main.KafkaTransactionProducer") as mock_class:
         producer = create_mock_producer()
         mock_class.return_value = producer
 
@@ -133,9 +124,7 @@ def test_upi_csv_upload():
 def test_card_pdf_upload():
     pdf_content = create_test_pdf()
 
-    with patch(
-        "finpulse.ingestion.main.KafkaTransactionProducer"
-    ) as mock_class:
+    with patch("finpulse.ingestion.main.KafkaTransactionProducer") as mock_class:
         producer = create_mock_producer()
         mock_class.return_value = producer
 
@@ -159,9 +148,7 @@ def test_card_pdf_upload():
 
 
 def test_invalid_manual_transaction():
-    with patch(
-        "finpulse.ingestion.main.KafkaTransactionProducer"
-    ) as mock_class:
+    with patch("finpulse.ingestion.main.KafkaTransactionProducer") as mock_class:
         mock_class.return_value = create_mock_producer()
 
         with TestClient(app) as client:

@@ -27,9 +27,7 @@ class OrchestrationConfig:
             duckdb_path
             or os.getenv("FINPULSE_DUCKDB_PATH", self.base_dir / "data/warehouse/finpulse.duckdb")
         )
-        self.dbt_project_dir = str(
-            dbt_project_dir or os.getenv("FINPULSE_DBT_PROJECT_DIR", "dbt")
-        )
+        self.dbt_project_dir = str(dbt_project_dir or os.getenv("FINPULSE_DBT_PROJECT_DIR", "dbt"))
         self.dbt_profiles_dir = str(
             dbt_profiles_dir or os.getenv("FINPULSE_DBT_PROFILES_DIR", "dbt")
         )

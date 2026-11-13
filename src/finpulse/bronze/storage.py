@@ -1,4 +1,3 @@
-
 import json
 import logging
 import threading
@@ -36,9 +35,7 @@ class BronzeStorage:
             raise ValueError("Event must contain event_timestamp")
 
         try:
-            timestamp = datetime.fromisoformat(
-                event_timestamp.replace("Z", "+00:00")
-            )
+            timestamp = datetime.fromisoformat(event_timestamp.replace("Z", "+00:00"))
         except (ValueError, AttributeError) as exc:
             raise ValueError("Invalid event_timestamp") from exc
 

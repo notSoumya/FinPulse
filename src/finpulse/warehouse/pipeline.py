@@ -52,4 +52,3 @@ def run_warehouse_pipeline(
 
 
 __all__ = ["run_warehouse_pipeline"]
-

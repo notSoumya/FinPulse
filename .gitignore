@@ -41,6 +41,12 @@ data/lake/*
 data/warehouse/*
 !data/warehouse/.gitkeep
 
+data/synthetic/bronze/
+data/synthetic/silver/
+data/synthetic/checkpoints/
+data/synthetic/quarantine/
+data/synthetic/warehouse/
+
 # Credentials
 credentials/
 secrets/

@@ -1,4 +1,3 @@
-
 from unittest.mock import Mock, patch
 
 import pytest
@@ -19,10 +18,12 @@ def test_retry_succeeds_on_first_attempt():
 
 
 def test_retry_succeeds_after_failure():
-    operation = Mock(side_effect=[
-        ValueError("Temporary failure"),
-        "success",
-    ])
+    operation = Mock(
+        side_effect=[
+            ValueError("Temporary failure"),
+            "success",
+        ]
+    )
 
     result = execute_with_retry(
         operation,
@@ -48,10 +49,12 @@ def test_retry_exhausts_all_attempts():
 
 
 def test_retry_uses_configured_delay():
-    operation = Mock(side_effect=[
-        ValueError("Temporary failure"),
-        "success",
-    ])
+    operation = Mock(
+        side_effect=[
+            ValueError("Temporary failure"),
+            "success",
+        ]
+    )
 
     with patch("finpulse.messaging.retry.time.sleep") as mock_sleep:
         execute_with_retry(

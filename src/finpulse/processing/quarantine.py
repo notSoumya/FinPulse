@@ -1,4 +1,3 @@
-
 import json
 from datetime import UTC, datetime
 from pathlib import Path
@@ -10,9 +9,7 @@ class QuarantineManager:
 
     def __init__(
         self,
-        base_path: str | Path = (
-            "data/lake/quarantine/rejected_transactions"
-        ),
+        base_path: str | Path = ("data/lake/quarantine/rejected_transactions"),
     ):
         self.base_path = Path(base_path)
 
@@ -38,7 +35,5 @@ class QuarantineManager:
         file_path = self.base_path / "rejected_events.jsonl"
 
         with file_path.open("a", encoding="utf-8") as file:
-            file.write(
-                json.dumps(record, ensure_ascii=False) + "\n"
-            )
+            file.write(json.dumps(record, ensure_ascii=False) + "\n")
             file.flush()

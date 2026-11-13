@@ -1,4 +1,3 @@
-
 import json
 import logging
 
@@ -14,12 +13,14 @@ class KafkaTransactionConsumer:
         group_id: str = "finpulse-consumer-group",
         topics: list[str] | None = None,
     ):
-        self.consumer = Consumer({
-            "bootstrap.servers": bootstrap_servers,
-            "group.id": group_id,
-            "auto.offset.reset": "earliest",
-            "enable.auto.commit": False,
-        })
+        self.consumer = Consumer(
+            {
+                "bootstrap.servers": bootstrap_servers,
+                "group.id": group_id,
+                "auto.offset.reset": "earliest",
+                "enable.auto.commit": False,
+            }
+        )
 
         self.topics = topics or [
             "raw.bank.sms",

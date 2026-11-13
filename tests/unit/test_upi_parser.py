@@ -1,4 +1,3 @@
-
 from decimal import Decimal
 
 import pytest
@@ -31,8 +30,7 @@ def test_upi_parser_rejects_missing_columns(tmp_path):
     csv_file = tmp_path / "invalid.csv"
 
     csv_file.write_text(
-        "date,amount\n"
-        "2026-11-07,500\n",
+        "date,amount\n2026-11-07,500\n",
         encoding="utf-8",
     )
 
@@ -45,8 +43,7 @@ def test_upi_parser_rejects_invalid_direction(tmp_path):
     csv_file = tmp_path / "invalid_direction.csv"
 
     csv_file.write_text(
-        "date,amount,type,merchant\n"
-        "2026-11-07,500,UNKNOWN,Amazon\n",
+        "date,amount,type,merchant\n2026-11-07,500,UNKNOWN,Amazon\n",
         encoding="utf-8",
     )
 

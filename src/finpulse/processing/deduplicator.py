@@ -1,4 +1,3 @@
-
 from datetime import timedelta
 
 from finpulse.common.models import Transaction
@@ -40,36 +39,21 @@ def is_duplicate(
             if not first.merchant_normalized or not second.merchant_normalized:
                 return False
 
-            if (
-                first.merchant_normalized.casefold()
-                != second.merchant_normalized.casefold()
-            ):
+            if first.merchant_normalized.casefold() != second.merchant_normalized.casefold():
                 return False
 
-            time_difference = abs(
-                first.transaction_timestamp
-                - second.transaction_timestamp
-            )
+            time_difference = abs(first.transaction_timestamp - second.transaction_timestamp)
 
-            return time_difference <= timedelta(
-                minutes=timestamp_tolerance_minutes
-            )
+            return time_difference <= timedelta(minutes=timestamp_tolerance_minutes)
 
     # Without a matching reference ID, use a conservative
     # heuristic match.
     if not first.merchant_normalized or not second.merchant_normalized:
         return False
 
-    if (
-        first.merchant_normalized.casefold()
-        != second.merchant_normalized.casefold()
-    ):
+    if first.merchant_normalized.casefold() != second.merchant_normalized.casefold():
         return False
 
-    time_difference = abs(
-        first.transaction_timestamp - second.transaction_timestamp
-    )
+    time_difference = abs(first.transaction_timestamp - second.transaction_timestamp)
 
-    return time_difference <= timedelta(
-        minutes=timestamp_tolerance_minutes
-    )
+    return time_difference <= timedelta(minutes=timestamp_tolerance_minutes)

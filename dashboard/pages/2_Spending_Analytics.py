@@ -96,4 +96,3 @@ if not df_daily.empty:
         template="plotly_white",
     )
     st.plotly_chart(fig_timeline, use_container_width=True)
-

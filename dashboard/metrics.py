@@ -53,4 +53,3 @@ def calculate_avg_ticket(expenses: float | Decimal, count: int) -> float | None:
     if count <= 0:
         return None
     return round(exp / count, 2)
-

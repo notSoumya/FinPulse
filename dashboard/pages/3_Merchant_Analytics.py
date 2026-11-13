@@ -70,9 +70,7 @@ with col_chart2:
 
 st.markdown("### 📋 Merchant Expenditure Summary Table")
 table_df = df_merchants.copy()
-table_df["Total Spent"] = table_df["total_spent"].apply(
-    lambda v: format_currency(v, currency)
-)
+table_df["Total Spent"] = table_df["total_spent"].apply(lambda v: format_currency(v, currency))
 table_df["Avg Ticket Size"] = table_df["avg_ticket_size"].apply(
     lambda v: format_currency(v, currency)
 )

@@ -68,6 +68,7 @@ else:
         currency=filters["currency"],
     )
     from dashboard.components.kpi_cards import render_kpi_cards
+
     render_kpi_cards(kpis, currency=filters["currency"])
 
     st.markdown("---")

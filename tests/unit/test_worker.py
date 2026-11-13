@@ -1,4 +1,3 @@
-
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -27,9 +26,7 @@ def mock_dependencies():
 
 
 @patch("finpulse.messaging.worker.process_event")
-def test_worker_processes_stores_and_commits(
-    mock_process, mock_dependencies
-):
+def test_worker_processes_stores_and_commits(mock_process, mock_dependencies):
     consumer, dlq, storage, message, event = mock_dependencies
 
     transaction = MagicMock()
@@ -52,9 +49,7 @@ def test_worker_processes_stores_and_commits(
 
 
 @patch("finpulse.messaging.worker.execute_with_retry")
-def test_worker_sends_invalid_event_to_dlq(
-    mock_retry, mock_dependencies
-):
+def test_worker_sends_invalid_event_to_dlq(mock_retry, mock_dependencies):
     consumer, dlq, storage, message, event = mock_dependencies
 
     mock_retry.side_effect = RetryExhaustedError("Invalid transaction")
@@ -74,9 +69,7 @@ def test_worker_sends_invalid_event_to_dlq(
 
 
 @patch("finpulse.messaging.worker.execute_with_retry")
-def test_worker_does_not_commit_if_dlq_publish_fails(
-    mock_retry, mock_dependencies
-):
+def test_worker_does_not_commit_if_dlq_publish_fails(mock_retry, mock_dependencies):
     consumer, dlq, storage, message, event = mock_dependencies
 
     mock_retry.side_effect = RetryExhaustedError("Invalid transaction")
@@ -95,9 +88,7 @@ def test_worker_does_not_commit_if_dlq_publish_fails(
 
 
 @patch("finpulse.messaging.worker.execute_with_retry")
-def test_worker_does_not_commit_if_bronze_storage_fails(
-    mock_retry, mock_dependencies
-):
+def test_worker_does_not_commit_if_bronze_storage_fails(mock_retry, mock_dependencies):
     consumer, dlq, storage, message, event = mock_dependencies
 
     transaction = MagicMock()

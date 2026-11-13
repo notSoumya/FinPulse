@@ -49,9 +49,7 @@ def test_ingest_bronze_task_with_csv(tmp_path):
     raw_dir.mkdir()
     sample_csv = raw_dir / "sample_upi.csv"
     sample_csv.write_text(
-        "date,amount,type,merchant\n"
-        "10-11-2026,500.00,DR,Swiggy\n"
-        "11-11-2026,1200.50,CR,Salary\n",
+        "date,amount,type,merchant\n10-11-2026,500.00,DR,Swiggy\n11-11-2026,1200.50,CR,Salary\n",
         encoding="utf-8",
     )
 

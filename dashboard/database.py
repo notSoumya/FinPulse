@@ -12,6 +12,7 @@ logger = logging.getLogger(__name__)
 
 class DatabaseUnavailableError(Exception):
     """Raised when the DuckDB warehouse database cannot be found or opened."""
+
     pass
 
 
@@ -41,7 +42,14 @@ def get_db_connection(
 
     try:
         # read_only=True allows concurrent readers alongside file-locked writers
-        con = duckdb.connect(str(target_path), read_only=read_only)
+        try:
+            con = duckdb.connect(str(target_path), read_only=read_only)
+        except duckdb.ConnectionException as conn_err:
+            if "different configuration than existing connections" in str(conn_err):
+                # Fall back to existing process connection configuration (e.g. in tests)
+                con = duckdb.connect(str(target_path))
+            else:
+                raise
         try:
             yield con
         finally:

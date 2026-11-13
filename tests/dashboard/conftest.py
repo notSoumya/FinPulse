@@ -163,4 +163,3 @@ def populated_duckdb(tmp_path):
         )
 
     return db_file
-

@@ -161,4 +161,3 @@ def test_concurrent_read_connections(empty_duckdb):
             res2 = con2.execute("SELECT count(*) FROM silver.transactions").fetchone()[0]
             assert res1 == 0
             assert res2 == 0
-

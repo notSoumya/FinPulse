@@ -16,4 +16,3 @@ __all__ = [
     "dbt_run_task",
     "dbt_test_task",
 ]
-

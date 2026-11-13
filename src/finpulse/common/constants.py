@@ -1,4 +1,3 @@
-
 # Supported transaction sources
 
 SOURCE_TYPES = {

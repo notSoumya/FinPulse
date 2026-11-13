@@ -18,13 +18,12 @@ def render_transactions_table(df: pd.DataFrame, currency: str = "INR"):
 
     # Format dates
     if "transaction_date" in display_df.columns:
-        display_df["transaction_date"] = pd.to_datetime(
-            display_df["transaction_date"]
-        ).dt.strftime("%Y-%m-%d")
+        display_df["transaction_date"] = pd.to_datetime(display_df["transaction_date"]).dt.strftime(
+            "%Y-%m-%d"
+        )
 
     st.dataframe(
         display_df,
         use_container_width=True,
         hide_index=True,
     )
-

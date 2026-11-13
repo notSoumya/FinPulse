@@ -12,11 +12,13 @@ logger = logging.getLogger(__name__)
 
 class DeadLetterProducer:
     def __init__(self, bootstrap_servers: str = "localhost:9092"):
-        self.producer = Producer({
-            "bootstrap.servers": bootstrap_servers,
-            "client.id": "finpulse-dlq-producer",
-            "acks": "all",
-        })
+        self.producer = Producer(
+            {
+                "bootstrap.servers": bootstrap_servers,
+                "client.id": "finpulse-dlq-producer",
+                "acks": "all",
+            }
+        )
 
     def publish(
         self,
@@ -47,9 +49,7 @@ class DeadLetterProducer:
             remaining = self.producer.flush(timeout=10)
 
             if remaining > 0:
-                raise TimeoutError(
-                    f"{remaining} DLQ message(s) still pending delivery"
-                )
+                raise TimeoutError(f"{remaining} DLQ message(s) still pending delivery")
 
             logger.info("Message sent to DLQ topic: %s", DLQ_TOPICS[source_type])
 

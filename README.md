@@ -217,7 +217,7 @@ Open `http://localhost:8501` to explore spending, counterparty analytics, cash f
 
 ## 🧪 Testing & Verification
 
-Run the full automated test suite (173 tests across unit, integration, DAG, and dashboard verification):
+Run the full automated test suite (180 tests across unit, integration, DAG, dashboard, and synthetic pipeline verification):
 ```bash
 pytest -v
 ```
@@ -225,6 +225,48 @@ pytest -v
 Run code formatting and lint verification:
 ```bash
 ruff check .
+```
+
+---
+
+## 🔬 Synthetic Data Generation & End-to-End Validation
+
+FinPulse includes a reproducible synthetic financial data generation and independent analytical validation suite that exercises all 4 ingestion formats, verifies every pipeline stage in an isolated sandbox (`data/synthetic/`), and proves 100% mathematical reconciliation against the warehouse.
+
+### 1. Generate Synthetic Data
+Produce reproducible fictional records across UPI CSV, Card PDF, Bank SMS, and Manual JSON:
+```bash
+python -m tests.fixtures.synthetic_data.generate_synthetic_data
+```
+Outputs are stored in `data/synthetic/raw/` with metadata in `data/synthetic/manifest.json`.
+
+### 2. Run Parser Validation
+Validate all 4 ingestion parsers against valid and edge-case inputs:
+```bash
+python -m tests.fixtures.synthetic_data.validate_parsers
+```
+Outputs: `data/synthetic/reports/parser_validation.json` (Status: `PASS`).
+
+### 3. Execute End-to-End Pipeline & Reconciliation
+Run the full isolated pipeline (Bronze ➔ Silver ➔ DuckDB ➔ dbt) and verify independent financial calculations:
+```bash
+python tests/validation/validate_synthetic_analytics.py
+```
+Outputs: `data/synthetic/reports/analytics_reconciliation.json` (Status: `PASS`).
+
+### 4. Run Automated Synthetic Test Suite
+```bash
+pytest tests/integration/test_synthetic_end_to_end.py -v
+```
+
+### 5. Launch Dashboard Against Synthetic Warehouse
+Explore the synthetic dataset in the interactive Streamlit dashboard:
+```bash
+# Windows PowerShell
+$env:FINPULSE_DUCKDB_PATH="data/synthetic/warehouse/finpulse_synthetic.duckdb"; streamlit run dashboard/app.py
+
+# Linux / macOS
+FINPULSE_DUCKDB_PATH=data/synthetic/warehouse/finpulse_synthetic.duckdb streamlit run dashboard/app.py
 ```
 
 ---

@@ -1,4 +1,3 @@
-
 import json
 from datetime import UTC, datetime
 from decimal import Decimal
@@ -11,11 +10,13 @@ def create_normalizer(tmp_path):
     mapping_path = tmp_path / "merchant_mapping.json"
 
     mapping_path.write_text(
-        json.dumps({
-            "AMZN PAYMENTS": "Amazon",
-            "AMAZON INDIA": "Amazon",
-            "UBER INDIA": "Uber",
-        }),
+        json.dumps(
+            {
+                "AMZN PAYMENTS": "Amazon",
+                "AMAZON INDIA": "Amazon",
+                "UBER INDIA": "Uber",
+            }
+        ),
         encoding="utf-8",
     )
 
@@ -43,9 +44,7 @@ def test_normalizes_extra_whitespace(tmp_path):
 def test_preserves_unknown_merchant(tmp_path):
     normalizer = create_normalizer(tmp_path)
 
-    assert normalizer.normalize("LOCAL GROCERY STORE") == (
-        "Local Grocery Store"
-    )
+    assert normalizer.normalize("LOCAL GROCERY STORE") == ("Local Grocery Store")
 
 
 def test_none_merchant_returns_none(tmp_path):
@@ -69,9 +68,7 @@ def test_normalizes_transaction_without_modifying_original(tmp_path):
         amount=Decimal("500.00"),
         currency="INR",
         direction="DEBIT",
-        transaction_timestamp=datetime(
-            2026, 11, 9, 10, 30, tzinfo=UTC
-        ),
+        transaction_timestamp=datetime(2026, 11, 9, 10, 30, tzinfo=UTC),
         merchant_raw="AMZN PAYMENTS",
         source_type="UPI_CSV",
     )

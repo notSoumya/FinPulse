@@ -1,6 +1,3 @@
-
-
-
 from finpulse.ingestion.parsers.card_pdf_parser import (
     extract_pdf_text,
     parse_card_pdf,
@@ -15,10 +12,7 @@ def test_pdf_without_transaction_rows(tmp_path):
 
     doc = fitz.open()
     page = doc.new_page()
-    page.insert_text(
-        (50, 50),
-        "Credit Card Statement\nNo transaction rows here"
-    )
+    page.insert_text((50, 50), "Credit Card Statement\nNo transaction rows here")
     doc.save(pdf_path)
     doc.close()
 

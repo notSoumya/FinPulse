@@ -45,4 +45,3 @@ def render_kpi_cards(kpis: dict[str, Any], currency: str = "INR"):
             label="Avg Ticket Size",
             value=format_currency(avg_val, currency),
         )
-

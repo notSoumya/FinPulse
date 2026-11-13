@@ -1,4 +1,3 @@
-
 from pydantic import ValidationError
 
 from finpulse.common.models import Transaction
@@ -30,10 +29,12 @@ def validate_transactions(data: list[dict]) -> tuple[list[Transaction], list[dic
             valid.append(transaction)
 
         except (ValidationError, ValueError, TypeError) as exc:
-            rejected.append({
-                "record_index": index,
-                "reason": str(exc),
-                "record": record,
-            })
+            rejected.append(
+                {
+                    "record_index": index,
+                    "reason": str(exc),
+                    "record": record,
+                }
+            )
 
     return valid, rejected

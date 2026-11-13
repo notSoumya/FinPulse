@@ -1,4 +1,3 @@
-
 from decimal import Decimal
 
 from finpulse.ingestion.parsers.manual_parser import parse_manual

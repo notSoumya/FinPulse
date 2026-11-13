@@ -85,8 +85,7 @@ def test_airflow_dag_structure_with_mocked_airflow():
             in created_tasks["silver_transformation"].downstream_list
         )
         assert (
-            created_tasks["dbt_transformations"]
-            in created_tasks["warehouse_sync"].downstream_list
+            created_tasks["dbt_transformations"] in created_tasks["warehouse_sync"].downstream_list
         )
         assert (
             created_tasks["data_quality_validation"]

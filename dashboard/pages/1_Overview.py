@@ -85,4 +85,3 @@ with chart_col3:
 with chart_col4:
     fig_merch = plot_top_merchants(df_merchants, currency=currency)
     st.plotly_chart(fig_merch, use_container_width=True)
-

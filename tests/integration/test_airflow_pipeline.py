@@ -31,9 +31,7 @@ def integration_env(tmp_path):
     # Create a valid raw UPI CSV file
     sample_csv = raw_dir / "sample_upi.csv"
     sample_csv.write_text(
-        "date,amount,type,merchant\n"
-        "10-11-2026,500.00,DR,Swiggy\n"
-        "10-11-2026,1500.00,DR,Amazon\n",
+        "date,amount,type,merchant\n10-11-2026,500.00,DR,Swiggy\n10-11-2026,1500.00,DR,Amazon\n",
         encoding="utf-8",
     )
 
@@ -95,21 +93,23 @@ def test_end_to_end_orchestrated_pipeline_flow(integration_env):
             "schema_version": "1.0",
         },
     ]
-    schema = pa.schema([
-        ("transaction_id", pa.string()),
-        ("user_id", pa.string()),
-        ("amount", pa.decimal128(18, 2)),
-        ("currency", pa.string()),
-        ("direction", pa.string()),
-        ("transaction_timestamp", pa.timestamp("us", tz="UTC")),
-        ("merchant_raw", pa.string()),
-        ("merchant_normalized", pa.string()),
-        ("reference_id", pa.string()),
-        ("source_type", pa.string()),
-        ("deduplication_key", pa.string()),
-        ("processed_at", pa.timestamp("us", tz="UTC")),
-        ("schema_version", pa.string()),
-    ])
+    schema = pa.schema(
+        [
+            ("transaction_id", pa.string()),
+            ("user_id", pa.string()),
+            ("amount", pa.decimal128(18, 2)),
+            ("currency", pa.string()),
+            ("direction", pa.string()),
+            ("transaction_timestamp", pa.timestamp("us", tz="UTC")),
+            ("merchant_raw", pa.string()),
+            ("merchant_normalized", pa.string()),
+            ("reference_id", pa.string()),
+            ("source_type", pa.string()),
+            ("deduplication_key", pa.string()),
+            ("processed_at", pa.timestamp("us", tz="UTC")),
+            ("schema_version", pa.string()),
+        ]
+    )
     table = pa.Table.from_pylist(data, schema=schema)
     write_deltalake(str(cfg.silver_path), table, mode="overwrite")
 
