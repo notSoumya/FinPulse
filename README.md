@@ -28,8 +28,8 @@ It establishes a shared canonical data contract across services, streams events 
 | **Phase 5** | Bronze Data Lake | Immutable JSONL partitioned storage (`year/month/day`), offset commits | **Completed** |
 | **Phase 6** | Silver Processing Layer | Bronze reader, validation, cleaner, deduplicator, Delta Lake writer | **Completed** |
 | **Phase 7** | Warehouse Architecture & Modeling | DuckDB warehouse, dbt-duckdb transformations, Gold Marts, pipeline runner | **Completed** |
-| **Phase 8** | Workflow Orchestration | Apache Airflow DAGs for automated batch pipeline scheduling | **Next Planned Phase** |
-| **Phase 9** | Intelligence & Visualizations | ML anomaly detection and Streamlit personal finance dashboard | **Planned** |
+| **Phase 8** | Workflow Orchestration | Apache Airflow DAGs for automated batch pipeline scheduling, retries, quality validation | **Completed** |
+| **Phase 9** | Intelligence & Visualizations | ML anomaly detection and Streamlit personal finance dashboard | **Next Planned Phase** |
 
 ---
 
@@ -197,11 +197,20 @@ Sync Silver transactions into DuckDB and execute dbt data models and tests:
 python scripts/run_warehouse.py
 ```
 
+### Step 6: Orchestrate with Apache Airflow
+Run the complete automated pipeline using Apache Airflow:
+```bash
+# Start Airflow metadata database and webserver/scheduler
+docker compose -f docker-compose.airflow.yml up airflow-init
+docker compose -f docker-compose.airflow.yml up -d
+```
+Access the Airflow UI at `http://localhost:8080` (credentials: `admin` / `admin`) to trigger or monitor `finpulse_end_to_end_pipeline`.
+
 ---
 
 ## 🧪 Testing & Verification
 
-Run the full automated test suite:
+Run the full automated test suite (148 tests across unit, integration, and DAG verification):
 ```bash
 pytest -v
 ```
