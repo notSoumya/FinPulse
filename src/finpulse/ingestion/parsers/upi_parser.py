@@ -1,4 +1,3 @@
-
 from decimal import Decimal
 
 import pandas as pd
@@ -24,14 +23,11 @@ def parse_upi_csv(file_path: str, user_id: str) -> list[Transaction]:
     missing_columns = required_columns - set(df.columns)
 
     if missing_columns:
-        raise ValueError(
-            f"Missing required columns: {sorted(missing_columns)}"
-        )
+        raise ValueError(f"Missing required columns: {sorted(missing_columns)}")
 
     transactions = []
 
     for row in df.to_dict(orient="records"):
-
         amount = Decimal(str(row["amount"]))
 
         raw_type = str(row["type"]).strip().upper()

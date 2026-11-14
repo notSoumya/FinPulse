@@ -6,6 +6,24 @@ from deltalake import DeltaTable, write_deltalake
 
 from finpulse.common.models import SilverTransaction
 
+SILVER_ARROW_SCHEMA = pa.schema(
+    [
+        ("transaction_id", pa.string()),
+        ("user_id", pa.string()),
+        ("amount", pa.decimal128(18, 2)),
+        ("currency", pa.string()),
+        ("direction", pa.string()),
+        ("transaction_timestamp", pa.timestamp("us", tz="UTC")),
+        ("merchant_raw", pa.string()),
+        ("merchant_normalized", pa.string()),
+        ("reference_id", pa.string()),
+        ("source_type", pa.string()),
+        ("deduplication_key", pa.string()),
+        ("processed_at", pa.timestamp("us", tz="UTC")),
+        ("schema_version", pa.string()),
+    ]
+)
+
 
 class SilverWriter:
     """Writes transactions idempotently into a Delta Lake Silver table."""
@@ -20,11 +38,8 @@ class SilverWriter:
     def _to_arrow_table(
         transactions: list[SilverTransaction],
     ) -> pa.Table:
-        records = [
-            transaction.model_dump(mode="python")
-            for transaction in transactions
-        ]
-        return pa.Table.from_pylist(records)
+        records = [transaction.model_dump(mode="python") for transaction in transactions]
+        return pa.Table.from_pylist(records, schema=SILVER_ARROW_SCHEMA)
 
     def write(
         self,
@@ -42,13 +57,10 @@ class SilverWriter:
 
         # Also prevent duplicate keys within the same incoming batch.
         unique_transactions = {
-            transaction.deduplication_key: transaction
-            for transaction in transactions
+            transaction.deduplication_key: transaction for transaction in transactions
         }
 
-        arrow_table = self._to_arrow_table(
-            list(unique_transactions.values())
-        )
+        arrow_table = self._to_arrow_table(list(unique_transactions.values()))
 
         self.table_path.parent.mkdir(
             parents=True,
@@ -69,9 +81,7 @@ class SilverWriter:
 
         merger = delta_table.merge(
             source=arrow_table,
-            predicate=(
-                "target.deduplication_key = source.deduplication_key"
-            ),
+            predicate=("target.deduplication_key = source.deduplication_key"),
             source_alias="source",
             target_alias="target",
         )

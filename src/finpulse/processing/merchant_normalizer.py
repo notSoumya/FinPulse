@@ -1,4 +1,3 @@
-
 import json
 import re
 from pathlib import Path
@@ -18,9 +17,7 @@ class MerchantNormalizer:
 
     def _load_mapping(self) -> dict[str, str]:
         if not self.mapping_path.exists():
-            raise FileNotFoundError(
-                f"Merchant mapping file not found: {self.mapping_path}"
-            )
+            raise FileNotFoundError(f"Merchant mapping file not found: {self.mapping_path}")
 
         with self.mapping_path.open("r", encoding="utf-8") as file:
             mapping = json.load(file)
@@ -60,9 +57,6 @@ class MerchantNormalizer:
     ) -> Transaction:
         data = transaction.model_dump()
 
-        data["merchant_normalized"] = self.normalize(
-            transaction.merchant_raw
-        )
+        data["merchant_normalized"] = self.normalize(transaction.merchant_raw)
 
         return Transaction.model_validate(data)
-        

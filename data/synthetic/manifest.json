@@ -1,0 +1,27 @@
+{
+  "generator": "FinPulse Synthetic Data Generator",
+  "seed": 42,
+  "primary_user": "synthetic_user_1",
+  "secondary_user": "synthetic_user_2",
+  "files": {
+    "upi_csv": "data\\synthetic\\raw\\upi\\upi_transactions.csv",
+    "upi_edge_cases_csv": "data\\synthetic\\raw\\upi\\upi_edge_cases.csv",
+    "card_pdf": "data\\synthetic\\raw\\card\\card_statement.pdf",
+    "bank_sms_json": "data\\synthetic\\raw\\bank_sms\\bank_sms.json",
+    "bank_sms_edge_cases_json": "data\\synthetic\\raw\\bank_sms\\bank_sms_edge_cases.json",
+    "manual_json": "data\\synthetic\\raw\\manual\\manual_transactions.json",
+    "manual_edge_cases_json": "data\\synthetic\\raw\\manual\\manual_edge_cases.json"
+  },
+  "counts": {
+    "upi_valid": 40,
+    "upi_edge": 3,
+    "card_valid": 35,
+    "card_edge": 2,
+    "sms_valid": 25,
+    "sms_edge": 2,
+    "manual_valid": 20,
+    "manual_edge": 3,
+    "total_valid": 120,
+    "total_edge": 10
+  }
+}

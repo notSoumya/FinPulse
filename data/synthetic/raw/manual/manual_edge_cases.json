@@ -1,0 +1,32 @@
+[
+  {
+    "user_id": "synthetic_user_1",
+    "amount": "-500.00",
+    "currency": "INR",
+    "direction": "DEBIT",
+    "transaction_timestamp": "2026-09-10T10:00:00Z",
+    "merchant_raw": "Negative Merchant",
+    "reference_id": "MAN_FAIL_1",
+    "_edge": "negative_amount"
+  },
+  {
+    "user_id": "synthetic_user_1",
+    "amount": "500.00",
+    "currency": "INR",
+    "direction": "",
+    "transaction_timestamp": "2026-09-11T10:00:00Z",
+    "merchant_raw": "No Direction",
+    "reference_id": "MAN_FAIL_2",
+    "_edge": "missing_direction"
+  },
+  {
+    "user_id": "synthetic_user_1",
+    "amount": "500.00",
+    "currency": "INR",
+    "direction": "DEBIT",
+    "transaction_timestamp": "INVALID_TIMESTAMP",
+    "merchant_raw": "Bad Date",
+    "reference_id": "MAN_FAIL_3",
+    "_edge": "invalid_timestamp"
+  }
+]

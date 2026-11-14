@@ -1,4 +1,3 @@
-
 import hashlib
 import json
 from datetime import datetime
@@ -22,22 +21,20 @@ def generate_transaction_id(
     """
 
     if reference_id:
-        raw_data = (
-            f"{user_id}|{source_type}|{reference_id.strip().upper()}"
-        )
+        raw_data = f"{user_id}|{source_type}|{reference_id.strip().upper()}"
     else:
-        raw_data = "|".join([
-            user_id,
-            source_type,
-            str(amount),
-            timestamp.isoformat(),
-            direction,
-            (merchant or "").strip().lower(),
-        ])
+        raw_data = "|".join(
+            [
+                user_id,
+                source_type,
+                str(amount),
+                timestamp.isoformat(),
+                direction,
+                (merchant or "").strip().lower(),
+            ]
+        )
 
-    return hashlib.sha256(
-        raw_data.encode("utf-8")
-    ).hexdigest()
+    return hashlib.sha256(raw_data.encode("utf-8")).hexdigest()
 
 
 def generate_payload_hash(payload: dict) -> str:
@@ -53,6 +50,4 @@ def generate_payload_hash(payload: dict) -> str:
         default=str,
     )
 
-    return hashlib.sha256(
-        serialized.encode("utf-8")
-    ).hexdigest()
+    return hashlib.sha256(serialized.encode("utf-8")).hexdigest()

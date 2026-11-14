@@ -1,4 +1,3 @@
-
 from datetime import UTC, datetime
 from decimal import Decimal
 from typing import Literal
@@ -56,7 +55,8 @@ class Transaction(BaseModel):
             raise ValueError("Currency must be a 3-letter code")
 
         return value
-        
+
+
 class SilverTransaction(Transaction):
     """
     Cleaned and standardized transaction representation
@@ -71,8 +71,6 @@ class SilverTransaction(Transaction):
     @classmethod
     def validate_processed_at(cls, value: datetime) -> datetime:
         if value.tzinfo is None or value.utcoffset() is None:
-            raise ValueError(
-                "processed_at must include timezone information"
-            )
+            raise ValueError("processed_at must include timezone information")
 
         return value.astimezone(UTC)

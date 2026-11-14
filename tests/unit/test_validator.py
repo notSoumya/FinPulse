@@ -1,4 +1,3 @@
-
 from finpulse.processing.validator import validate_transaction
 
 

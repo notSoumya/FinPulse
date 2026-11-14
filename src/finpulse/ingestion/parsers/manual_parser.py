@@ -1,4 +1,3 @@
-
 from datetime import datetime
 from decimal import Decimal
 
@@ -16,9 +15,7 @@ def parse_manual(payload: dict) -> Transaction:
 
     amount = Decimal(str(data["amount"]))
 
-    timestamp = datetime.fromisoformat(
-        data["transaction_timestamp"].replace("Z", "+00:00")
-    )
+    timestamp = datetime.fromisoformat(data["transaction_timestamp"].replace("Z", "+00:00"))
 
     direction = data["direction"].strip().upper()
     currency = data.get("currency", "INR").strip().upper()

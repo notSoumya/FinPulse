@@ -1,0 +1,56 @@
+version: 2
+
+models:
+  - name: gold_daily_spending
+    description: "Daily net cash flows, debit vs credit totals, and transaction counts."
+    columns:
+      - name: user_id
+        tests:
+          - not_null
+      - name: transaction_date
+        tests:
+          - not_null
+      - name: total_transactions
+        tests:
+          - not_null
+
+  - name: gold_monthly_spending
+    description: "Monthly income, expenses, net savings, and savings rate percentage."
+    columns:
+      - name: user_id
+        tests:
+          - not_null
+      - name: transaction_month
+        tests:
+          - not_null
+
+  - name: gold_merchant_spending
+    description: "Merchant-level debit spend, transaction count, and average ticket size."
+    columns:
+      - name: user_id
+        tests:
+          - not_null
+      - name: merchant_name
+        tests:
+          - not_null
+
+  - name: gold_cashflow_summary
+    description: "Aggregate summary of cashflow volume, counts, and ticket sizes by direction."
+    columns:
+      - name: user_id
+        tests:
+          - not_null
+      - name: direction
+        tests:
+          - not_null
+
+  - name: gold_category_spending
+    description: "Category-level spending breakdown with heuristic classification."
+    columns:
+      - name: user_id
+        tests:
+          - not_null
+      - name: spending_category
+        tests:
+          - not_null
+

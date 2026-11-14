@@ -1,4 +1,3 @@
-
 from typing import Any
 
 from pydantic import ValidationError
@@ -22,8 +21,7 @@ def validate_transaction(
 
     except ValidationError as exc:
         errors = [
-            f"{'.'.join(str(part) for part in error['loc'])}: "
-            f"{error['msg']}"
+            f"{'.'.join(str(part) for part in error['loc'])}: {error['msg']}"
             for error in exc.errors()
         ]
 

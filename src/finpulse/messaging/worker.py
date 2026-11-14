@@ -1,4 +1,3 @@
-
 import logging
 
 from finpulse.bronze.storage import BronzeStorage
@@ -22,15 +21,9 @@ class KafkaTransactionWorker:
         max_attempts: int = 3,
         retry_delay_seconds: float = 1.0,
     ):
-        self.consumer = (
-            consumer if consumer is not None else KafkaTransactionConsumer()
-        )
-        self.dlq_producer = (
-            dlq_producer if dlq_producer is not None else DeadLetterProducer()
-        )
-        self.bronze_storage = (
-            bronze_storage if bronze_storage is not None else BronzeStorage()
-        )
+        self.consumer = consumer if consumer is not None else KafkaTransactionConsumer()
+        self.dlq_producer = dlq_producer if dlq_producer is not None else DeadLetterProducer()
+        self.bronze_storage = bronze_storage if bronze_storage is not None else BronzeStorage()
         self.max_attempts = max_attempts
         self.retry_delay_seconds = retry_delay_seconds
 
@@ -51,16 +44,10 @@ class KafkaTransactionWorker:
             )
 
         except RetryExhaustedError as exc:
-            logger.error(
-                "Transaction validation failed after retries. Sending to DLQ."
-            )
+            logger.error("Transaction validation failed after retries. Sending to DLQ.")
 
             payload = event.get("payload", {})
-            source_type = (
-                payload.get("source_type")
-                if isinstance(payload, dict)
-                else None
-            )
+            source_type = payload.get("source_type") if isinstance(payload, dict) else None
 
             self.dlq_producer.publish(
                 source_type=source_type,
@@ -83,8 +70,7 @@ class KafkaTransactionWorker:
 
         except RetryExhaustedError:
             logger.exception(
-                "Bronze storage failed after retries. "
-                "Kafka offset will not be committed."
+                "Bronze storage failed after retries. Kafka offset will not be committed."
             )
             raise
 

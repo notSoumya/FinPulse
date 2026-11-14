@@ -1,4 +1,3 @@
-
 from datetime import UTC, datetime
 from decimal import Decimal
 
@@ -15,9 +14,7 @@ def valid_silver_transaction():
         "amount": Decimal("500.00"),
         "currency": "inr",
         "direction": "DEBIT",
-        "transaction_timestamp": datetime(
-            2026, 11, 9, 10, 30, tzinfo=UTC
-        ),
+        "transaction_timestamp": datetime(2026, 11, 9, 10, 30, tzinfo=UTC),
         "merchant_raw": "AMZN PAYMENTS",
         "merchant_normalized": "Amazon",
         "reference_id": "REF123",
@@ -57,9 +54,7 @@ def test_processed_at_requires_timezone():
 # Test 4: processed_at is converted to UTC
 def test_processed_at_is_converted_to_utc():
     data = valid_silver_transaction()
-    data["processed_at"] = datetime.fromisoformat(
-        "2026-11-09T16:00:00+05:30"
-    )
+    data["processed_at"] = datetime.fromisoformat("2026-11-09T16:00:00+05:30")
 
     transaction = SilverTransaction(**data)
 

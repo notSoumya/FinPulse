@@ -1,0 +1,14 @@
+[
+  {
+    "message": "Your account has been debited towards Swiggy with no amount.",
+    "timestamp": "2026-09-05T10:00:00Z",
+    "user_id": "synthetic_user_1",
+    "_edge": "missing_amount"
+  },
+  {
+    "message": "INR 500.00 transaction initiated at Store.",
+    "timestamp": "2026-09-06T10:00:00Z",
+    "user_id": "synthetic_user_1",
+    "_edge": "unknown_direction"
+  }
+]

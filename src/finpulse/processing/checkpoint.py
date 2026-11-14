@@ -1,5 +1,5 @@
-
 import json
+import time
 from pathlib import Path
 
 
@@ -8,9 +8,7 @@ class CheckpointManager:
 
     def __init__(
         self,
-        checkpoint_path: str | Path = (
-            "data/lake/checkpoints/silver_checkpoint.json"
-        ),
+        checkpoint_path: str | Path = ("data/lake/checkpoints/silver_checkpoint.json"),
     ):
         self.checkpoint_path = Path(checkpoint_path)
         self.processed_event_ids: set[str] = set()
@@ -32,8 +30,7 @@ class CheckpointManager:
         event_ids = data.get("processed_event_ids", [])
 
         if not isinstance(event_ids, list) or not all(
-            isinstance(event_id, str) and event_id
-            for event_id in event_ids
+            isinstance(event_id, str) and event_id for event_id in event_ids
         ):
             raise ValueError("Invalid checkpoint event IDs")
 
@@ -64,14 +61,17 @@ class CheckpointManager:
             encoding="utf-8",
         ) as file:
             json.dump(
-                {
-                    "processed_event_ids": sorted(
-                        self.processed_event_ids
-                    )
-                },
+                {"processed_event_ids": sorted(self.processed_event_ids)},
                 file,
                 indent=4,
             )
             file.flush()
 
-        temporary_path.replace(self.checkpoint_path)
+        for attempt in range(5):
+            try:
+                temporary_path.replace(self.checkpoint_path)
+                break
+            except (PermissionError, OSError):
+                if attempt == 4:
+                    raise
+                time.sleep(0.05 * (attempt + 1))

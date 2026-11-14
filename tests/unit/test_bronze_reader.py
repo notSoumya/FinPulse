@@ -1,4 +1,3 @@
-
 import json
 
 from finpulse.processing.bronze_reader import BronzeReader
@@ -53,9 +52,7 @@ def test_skips_malformed_json(tmp_path):
 
     event_file = bronze_path / "events.jsonl"
     event_file.write_text(
-        '{"event_id": "event_001"}\n'
-        'this is invalid json\n'
-        '{"event_id": "event_002"}\n',
+        '{"event_id": "event_001"}\nthis is invalid json\n{"event_id": "event_002"}\n',
         encoding="utf-8",
     )
 
@@ -80,8 +77,7 @@ def test_skips_empty_lines(tmp_path):
 
     event_file = bronze_path / "events.jsonl"
     event_file.write_text(
-        '{"event_id": "event_001"}\n\n'
-        '{"event_id": "event_002"}\n',
+        '{"event_id": "event_001"}\n\n{"event_id": "event_002"}\n',
         encoding="utf-8",
     )
 

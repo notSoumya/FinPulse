@@ -1,4 +1,3 @@
-
 import json
 from datetime import UTC, datetime
 from decimal import Decimal
@@ -65,8 +64,6 @@ def create_pipeline(tmp_path):
         checkpoint_manager=CheckpointManager(tmp_path / "checkpoint.json"),
     )
 
-    
-
     return pipeline, bronze_path, silver_path, quarantine_path
 
 
@@ -88,9 +85,7 @@ def test_valid_event_is_written_to_silver(tmp_path):
 
 
 def test_invalid_event_is_quarantined(tmp_path):
-    pipeline, bronze_path, silver_path, quarantine_path = (
-        create_pipeline(tmp_path)
-    )
+    pipeline, bronze_path, silver_path, quarantine_path = create_pipeline(tmp_path)
 
     invalid_event = create_event(amount="-100")
     write_event(bronze_path, invalid_event)
@@ -103,13 +98,9 @@ def test_invalid_event_is_quarantined(tmp_path):
     assert stats["transactions_written"] == 0
     assert quarantine_file.exists()
 
-    rejected = json.loads(
-        quarantine_file.read_text(encoding="utf-8").strip()
-    )
+    rejected = json.loads(quarantine_file.read_text(encoding="utf-8").strip())
 
-    assert rejected["original_event"]["event_id"] == (
-        invalid_event["event_id"]
-    )
+    assert rejected["original_event"]["event_id"] == (invalid_event["event_id"])
     assert rejected["rejection_reasons"]
 
 
@@ -136,12 +127,12 @@ def test_empty_bronze_storage_returns_zero_counts(tmp_path):
     stats = pipeline.run()
 
     assert stats == {
-    "events_read": 0,
-    "events_skipped_by_checkpoint": 0,
-    "transactions_written": 0,
-    "duplicates_skipped": 0,
-    "transactions_quarantined": 0,
-}
+        "events_read": 0,
+        "events_skipped_by_checkpoint": 0,
+        "transactions_written": 0,
+        "duplicates_skipped": 0,
+        "transactions_quarantined": 0,
+    }
 
 
 def test_second_run_skips_checkpointed_events(tmp_path):

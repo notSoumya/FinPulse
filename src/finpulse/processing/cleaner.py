@@ -1,4 +1,3 @@
-
 from finpulse.common.models import Transaction
 
 

@@ -1,0 +1,182 @@
+[
+  {
+    "user_id": "synthetic_user_1",
+    "amount": "350.00",
+    "currency": "INR",
+    "direction": "DEBIT",
+    "transaction_timestamp": "2026-09-06T12:00:00Z",
+    "merchant_raw": "Local Vegetable Vendor",
+    "reference_id": "MAN26090601"
+  },
+  {
+    "user_id": "synthetic_user_1",
+    "amount": "1200.00",
+    "currency": "INR",
+    "direction": "DEBIT",
+    "transaction_timestamp": "2026-09-16T18:30:00Z",
+    "merchant_raw": "Pharmacy Store",
+    "reference_id": "MAN26091601"
+  },
+  {
+    "user_id": "synthetic_user_1",
+    "amount": "8000.00",
+    "currency": "INR",
+    "direction": "CREDIT",
+    "transaction_timestamp": "2026-09-24T15:00:00Z",
+    "merchant_raw": "Freelance Design",
+    "reference_id": "MAN26092401"
+  },
+  {
+    "user_id": "synthetic_user_1",
+    "amount": "480.00",
+    "currency": "INR",
+    "direction": "DEBIT",
+    "transaction_timestamp": "2026-09-29T11:15:00Z",
+    "merchant_raw": "Coffee House",
+    "reference_id": "MAN26092901"
+  },
+  {
+    "user_id": "synthetic_user_1",
+    "amount": "500.00",
+    "currency": "INR",
+    "direction": "DEBIT",
+    "transaction_timestamp": "2026-10-05T09:30:00Z",
+    "merchant_raw": "Auto Rickshaw Cash",
+    "reference_id": "MAN26100501"
+  },
+  {
+    "user_id": "synthetic_user_1",
+    "amount": "2500.00",
+    "currency": "INR",
+    "direction": "DEBIT",
+    "transaction_timestamp": "2026-10-12T16:00:00Z",
+    "merchant_raw": "Books & Stationery",
+    "reference_id": "MAN26101201"
+  },
+  {
+    "user_id": "synthetic_user_1",
+    "amount": "15000.00",
+    "currency": "INR",
+    "direction": "CREDIT",
+    "transaction_timestamp": "2026-10-19T14:00:00Z",
+    "merchant_raw": "Consulting Stipend",
+    "reference_id": "MAN26101901"
+  },
+  {
+    "user_id": "synthetic_user_1",
+    "amount": "650.00",
+    "currency": "INR",
+    "direction": "DEBIT",
+    "transaction_timestamp": "2026-10-24T13:45:00Z",
+    "merchant_raw": "Lunch with Team",
+    "reference_id": "MAN26102401"
+  },
+  {
+    "user_id": "synthetic_user_1",
+    "amount": "1800.00",
+    "currency": "INR",
+    "direction": "DEBIT",
+    "transaction_timestamp": "2026-10-27T17:10:00Z",
+    "merchant_raw": "Hardware Tools",
+    "reference_id": "MAN26102701"
+  },
+  {
+    "user_id": "synthetic_user_1",
+    "amount": "320.00",
+    "currency": "INR",
+    "direction": "DEBIT",
+    "transaction_timestamp": "2026-10-30T19:20:00Z",
+    "merchant_raw": "Snack Corner",
+    "reference_id": "MAN26103001"
+  },
+  {
+    "user_id": "synthetic_user_1",
+    "amount": "400.00",
+    "currency": "INR",
+    "direction": "DEBIT",
+    "transaction_timestamp": "2026-11-03T10:00:00Z",
+    "merchant_raw": "Local Laundry",
+    "reference_id": "MAN26110301"
+  },
+  {
+    "user_id": "synthetic_user_1",
+    "amount": "3100.00",
+    "currency": "INR",
+    "direction": "DEBIT",
+    "transaction_timestamp": "2026-11-07T15:30:00Z",
+    "merchant_raw": "Home Maintenance",
+    "reference_id": "MAN26110701"
+  },
+  {
+    "user_id": "synthetic_user_1",
+    "amount": "5000.00",
+    "currency": "INR",
+    "direction": "CREDIT",
+    "transaction_timestamp": "2026-11-09T11:00:00Z",
+    "merchant_raw": "Tutoring Income",
+    "reference_id": "MAN26110901"
+  },
+  {
+    "user_id": "synthetic_user_1",
+    "amount": "750.00",
+    "currency": "INR",
+    "direction": "DEBIT",
+    "transaction_timestamp": "2026-11-11T14:40:00Z",
+    "merchant_raw": "Pet Store Supplies",
+    "reference_id": "MAN26111101"
+  },
+  {
+    "user_id": "synthetic_user_1",
+    "amount": "1100.00",
+    "currency": "INR",
+    "direction": "DEBIT",
+    "transaction_timestamp": "2026-11-12T18:00:00Z",
+    "merchant_raw": "Dry Cleaning",
+    "reference_id": "MAN26111201"
+  },
+  {
+    "user_id": "synthetic_user_1",
+    "amount": "250.00",
+    "currency": "INR",
+    "direction": "DEBIT",
+    "transaction_timestamp": "2026-11-13T12:15:00Z",
+    "merchant_raw": "Newspaper Subscription",
+    "reference_id": "MAN26111301"
+  },
+  {
+    "user_id": "synthetic_user_2",
+    "amount": "700.00",
+    "currency": "INR",
+    "direction": "DEBIT",
+    "transaction_timestamp": "2026-10-10T12:00:00Z",
+    "merchant_raw": "Bookstore",
+    "reference_id": "MAN261010U2"
+  },
+  {
+    "user_id": "synthetic_user_2",
+    "amount": "10000.00",
+    "currency": "INR",
+    "direction": "CREDIT",
+    "transaction_timestamp": "2026-10-25T15:00:00Z",
+    "merchant_raw": "Bonus Prize",
+    "reference_id": "MAN261025U2"
+  },
+  {
+    "user_id": "synthetic_user_2",
+    "amount": "550.00",
+    "currency": "INR",
+    "direction": "DEBIT",
+    "transaction_timestamp": "2026-11-02T16:00:00Z",
+    "merchant_raw": "Cafe",
+    "reference_id": "MAN261102U2"
+  },
+  {
+    "user_id": "synthetic_user_2",
+    "amount": "1350.00",
+    "currency": "INR",
+    "direction": "DEBIT",
+    "transaction_timestamp": "2026-11-08T11:00:00Z",
+    "merchant_raw": "Grocery Store",
+    "reference_id": "MAN261108U2"
+  }
+]

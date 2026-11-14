@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: int_daily_transactions
+    description: "Intermediate daily rollups grouped by user, date, currency, and direction."
+    columns:
+      - name: user_id
+        tests:
+          - not_null
+      - name: transaction_date
+        tests:
+          - not_null
+      - name: direction
+        tests:
+          - not_null
+      - name: total_amount
+        tests:
+          - not_null
+

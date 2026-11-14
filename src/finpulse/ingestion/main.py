@@ -38,10 +38,7 @@ class SMSRequest(BaseModel):
 
 
 def serialize_transactions(transactions):
-    return [
-        transaction.model_dump(mode="json")
-        for transaction in transactions
-    ]
+    return [transaction.model_dump(mode="json") for transaction in transactions]
 
 
 def publish_transaction(transaction):

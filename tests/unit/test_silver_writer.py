@@ -1,4 +1,3 @@
-
 from datetime import UTC, datetime
 from decimal import Decimal
 
@@ -15,9 +14,7 @@ def create_silver_transaction(
         amount=Decimal("500.00"),
         currency="INR",
         direction="DEBIT",
-        transaction_timestamp=datetime(
-            2026, 11, 9, 10, 30, tzinfo=UTC
-        ),
+        transaction_timestamp=datetime(2026, 11, 9, 10, 30, tzinfo=UTC),
         merchant_raw="AMZN PAYMENTS",
         merchant_normalized="Amazon",
         reference_id="REF123",
@@ -72,6 +69,7 @@ def test_append_preserves_existing_records(tmp_path):
         "txn_001",
         "txn_002",
     }
+
 
 def test_duplicate_deduplication_key_is_not_inserted_again(tmp_path):
     writer = SilverWriter(tmp_path / "silver")

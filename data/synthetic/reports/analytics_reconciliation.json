@@ -1,0 +1,183 @@
+{
+  "timestamp": "2026-11-14T01:44:23.192133",
+  "primary_user": "synthetic_user_1",
+  "overall_status": "PASS",
+  "pipeline_execution": {
+    "silver_stats": {
+      "events_read": 122,
+      "events_skipped_by_checkpoint": 0,
+      "transactions_written": 120,
+      "duplicates_skipped": 0,
+      "transactions_quarantined": 2
+    },
+    "silver_idempotency_second_run": {
+      "events_read": 122,
+      "events_skipped_by_checkpoint": 122,
+      "transactions_written": 0,
+      "duplicates_skipped": 0,
+      "transactions_quarantined": 0
+    },
+    "duckdb_rows_synced": 120,
+    "dbt_models_passed": 7,
+    "dbt_tests_passed": 27,
+    "quarantined_records": 2,
+    "ml_anomalies_detected": 20,
+    "ml_high_severity_count": 2
+  },
+  "independent_expected_totals": {
+    "user_id": "synthetic_user_1",
+    "total_transactions": 106,
+    "total_income": 227900.0,
+    "total_expenses": 120563.0,
+    "net_cash_flow": 107337.0,
+    "savings_rate_pct": 47.1,
+    "source_counts": {
+      "UPI_CSV": 36,
+      "CARD_PDF": 32,
+      "BANK_SMS": 22,
+      "MANUAL": 16
+    },
+    "monthly": {
+      "2026-09-01": {
+        "income": 103500.0,
+        "expenses": 32417.5,
+        "count": 33
+      },
+      "2026-10-01": {
+        "income": 116500.0,
+        "expenses": 41007.5,
+        "count": 41
+      },
+      "2026-11-01": {
+        "income": 7900.0,
+        "expenses": 47138.0,
+        "count": 32
+      }
+    },
+    "categories": {
+      "Food & Groceries": {
+        "spent": 24510.5,
+        "count": 34
+      },
+      "Shopping": {
+        "spent": 49983.0,
+        "count": 16
+      },
+      "Travel & Commute": {
+        "spent": 7189.5,
+        "count": 20
+      },
+      "Uncategorized": {
+        "spent": 38880.0,
+        "count": 24
+      }
+    },
+    "top_merchants": {
+      "Amazon": 29044.0,
+      "Flipkart": 9590.0,
+      "Reliance Digital": 8990.0,
+      "Flipkart Internet": 7899.0,
+      "D-Mart": 7150.0
+    }
+  },
+  "reconciliation": [
+    {
+      "metric": "total_transactions",
+      "expected": 106,
+      "actual": 106,
+      "difference": 0,
+      "status": "PASS"
+    },
+    {
+      "metric": "total_income",
+      "expected": 227900.0,
+      "actual": 227900.0,
+      "difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "metric": "total_expenses",
+      "expected": 120563.0,
+      "actual": 120563.0,
+      "difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "metric": "monthly_expenses_2026-09-01",
+      "expected": 32417.5,
+      "actual": 32417.5,
+      "difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "metric": "monthly_income_2026-09-01",
+      "expected": 103500.0,
+      "actual": 103500.0,
+      "difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "metric": "monthly_expenses_2026-10-01",
+      "expected": 41007.5,
+      "actual": 41007.5,
+      "difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "metric": "monthly_income_2026-10-01",
+      "expected": 116500.0,
+      "actual": 116500.0,
+      "difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "metric": "monthly_expenses_2026-11-01",
+      "expected": 47138.0,
+      "actual": 47138.0,
+      "difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "metric": "monthly_income_2026-11-01",
+      "expected": 7900.0,
+      "actual": 7900.0,
+      "difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "metric": "category_Travel & Commute_spent",
+      "expected": 7189.5,
+      "actual": 7189.5,
+      "difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "metric": "category_Shopping_spent",
+      "expected": 49983.0,
+      "actual": 49983.0,
+      "difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "metric": "category_Uncategorized_spent",
+      "expected": 38880.0,
+      "actual": 38880.0,
+      "difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "metric": "category_Food & Groceries_spent",
+      "expected": 24510.5,
+      "actual": 24510.5,
+      "difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "metric": "quarantined_records",
+      "expected": 2,
+      "actual": 2,
+      "difference": 0,
+      "status": "PASS"
+    }
+  ]
+}

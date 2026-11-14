@@ -1,0 +1,4 @@
+date,amount,type,merchant,reference_id,currency
+2026-09-02 10:15:00,450.00,DEBIT,Swiggy,UPI26090201,INR
+2026-09-04 11:00:00,INVALID_AMOUNT,DEBIT,Fail Merchant,UPI_FAIL_1,INR
+2026-09-06 12:00:00,500.00,UNKNOWN_TYPE,Fail Merchant 2,UPI_FAIL_2,INR

@@ -1,4 +1,3 @@
-
 import json
 import logging
 from datetime import UTC, datetime
@@ -14,11 +13,13 @@ logger = logging.getLogger(__name__)
 
 class KafkaTransactionProducer:
     def __init__(self, bootstrap_servers: str = "localhost:9092"):
-        self.producer = Producer({
-            "bootstrap.servers": bootstrap_servers,
-            "client.id": "finpulse-ingestion-producer",
-            "acks": "all",
-        })
+        self.producer = Producer(
+            {
+                "bootstrap.servers": bootstrap_servers,
+                "client.id": "finpulse-ingestion-producer",
+                "acks": "all",
+            }
+        )
 
     def delivery_report(self, err, message):
         if err is not None:
@@ -55,9 +56,7 @@ class KafkaTransactionProducer:
             remaining = self.producer.flush(timeout=10)
 
             if remaining > 0:
-                raise TimeoutError(
-                    f"{remaining} Kafka message(s) still pending delivery"
-                )
+                raise TimeoutError(f"{remaining} Kafka message(s) still pending delivery")
 
         except Exception:
             logger.exception("Failed to publish transaction")
@@ -67,4 +66,3 @@ class KafkaTransactionProducer:
 
     def close(self):
         self.producer.flush(timeout=10)
-    

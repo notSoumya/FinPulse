@@ -1,4 +1,3 @@
-
 from datetime import UTC, datetime
 from decimal import Decimal
 
@@ -21,9 +20,7 @@ def create_transaction(
         amount=Decimal(amount),
         currency="INR",
         direction="DEBIT",
-        transaction_timestamp=timestamp or datetime(
-            2026, 11, 9, 10, 30, tzinfo=UTC
-        ),
+        transaction_timestamp=timestamp or datetime(2026, 11, 9, 10, 30, tzinfo=UTC),
         merchant_normalized=merchant,
         reference_id=reference_id,
         source_type=source_type,
@@ -38,39 +35,29 @@ def test_same_reference_id_is_duplicate():
 
 
 def test_different_reference_ids_can_match_heuristically():
-    first = create_transaction(
-        "txn_001", "BANK_SMS", reference_id="REF001"
-    )
-    second = create_transaction(
-        "txn_002", "UPI_CSV", reference_id="REF002"
-    )
+    first = create_transaction("txn_001", "BANK_SMS", reference_id="REF001")
+    second = create_transaction("txn_002", "UPI_CSV", reference_id="REF002")
 
     assert is_duplicate(first, second)
 
 
 def test_different_users_are_not_duplicates():
     first = create_transaction("txn_001", "BANK_SMS")
-    second = create_transaction(
-        "txn_002", "UPI_CSV", user_id="user_002"
-    )
+    second = create_transaction("txn_002", "UPI_CSV", user_id="user_002")
 
     assert not is_duplicate(first, second)
 
 
 def test_different_amounts_are_not_duplicates():
     first = create_transaction("txn_001", "BANK_SMS")
-    second = create_transaction(
-        "txn_002", "UPI_CSV", amount="700.00"
-    )
+    second = create_transaction("txn_002", "UPI_CSV", amount="700.00")
 
     assert not is_duplicate(first, second)
 
 
 def test_different_merchants_are_not_duplicates():
     first = create_transaction("txn_001", "BANK_SMS")
-    second = create_transaction(
-        "txn_002", "UPI_CSV", merchant="Flipkart"
-    )
+    second = create_transaction("txn_002", "UPI_CSV", merchant="Flipkart")
 
     assert not is_duplicate(first, second)
 
@@ -101,11 +88,7 @@ def test_same_transaction_id_is_duplicate():
 
 
 def test_same_amount_and_merchant_without_normalized_merchant_is_not_duplicate():
-    first = create_transaction(
-        "txn_001", "BANK_SMS", merchant=None
-    )
-    second = create_transaction(
-        "txn_002", "UPI_CSV", merchant=None
-    )
+    first = create_transaction("txn_001", "BANK_SMS", merchant=None)
+    second = create_transaction("txn_002", "UPI_CSV", merchant=None)
 
     assert not is_duplicate(first, second)

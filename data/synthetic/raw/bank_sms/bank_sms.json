@@ -1,0 +1,152 @@
+[
+  {
+    "message": "Your a/c is credited with Rs. 85,000.00 towards Salary.",
+    "timestamp": "2026-09-30T10:00:00Z",
+    "reference_id": "SAL20260930",
+    "user_id": "synthetic_user_1"
+  },
+  {
+    "message": "INR 1,250.00 debited from a/c at D-MART.",
+    "timestamp": "2026-09-04T17:15:00Z",
+    "reference_id": "SMS26090401",
+    "user_id": "synthetic_user_1"
+  },
+  {
+    "message": "Rs. 620.00 spent towards SWIGGY INSTAMART.",
+    "timestamp": "2026-09-09T13:40:00Z",
+    "reference_id": "SMS26090901",
+    "user_id": "synthetic_user_1"
+  },
+  {
+    "message": "INR 500.00 withdrawn from ATM.",
+    "timestamp": "2026-09-13T11:00:00Z",
+    "reference_id": "SMS26091301",
+    "user_id": "synthetic_user_1"
+  },
+  {
+    "message": "Rs. 3,450.00 debited towards AMAZON PAYMENTS.",
+    "timestamp": "2026-09-19T15:20:00Z",
+    "reference_id": "SMS26091901",
+    "user_id": "synthetic_user_1"
+  },
+  {
+    "message": "INR 2,000.00 received from Friend Rahul.",
+    "timestamp": "2026-09-22T18:00:00Z",
+    "reference_id": "SMS26092201",
+    "user_id": "synthetic_user_1"
+  },
+  {
+    "message": "Rs. 410.00 debited towards UBER TRIP.",
+    "timestamp": "2026-09-27T08:30:00Z",
+    "reference_id": "SMS26092701",
+    "user_id": "synthetic_user_1"
+  },
+  {
+    "message": "Your a/c is credited with Rs. 85,000.00 towards Salary.",
+    "timestamp": "2026-10-31T10:00:00Z",
+    "reference_id": "SAL20261031",
+    "user_id": "synthetic_user_1"
+  },
+  {
+    "message": "INR 840.00 debited from a/c at ZOMATO.",
+    "timestamp": "2026-10-03T20:10:00Z",
+    "reference_id": "SMS26100301",
+    "user_id": "synthetic_user_1"
+  },
+  {
+    "message": "Rs. 1,890.00 spent at FLIPKART.",
+    "timestamp": "2026-10-08T14:00:00Z",
+    "reference_id": "SMS26100801",
+    "user_id": "synthetic_user_1"
+  },
+  {
+    "message": "INR 350.00 debited towards OLA CABS.",
+    "timestamp": "2026-10-11T09:15:00Z",
+    "reference_id": "SMS26101101",
+    "user_id": "synthetic_user_1"
+  },
+  {
+    "message": "Rs. 720.00 debited at BLINKIT.",
+    "timestamp": "2026-10-15T16:45:00Z",
+    "reference_id": "SMS26101501",
+    "user_id": "synthetic_user_1"
+  },
+  {
+    "message": "INR 4,500.00 received from Client Consulting.",
+    "timestamp": "2026-10-18T12:00:00Z",
+    "reference_id": "SMS26101801",
+    "user_id": "synthetic_user_1"
+  },
+  {
+    "message": "Rs. 2,150.00 debited towards D-MART.",
+    "timestamp": "2026-10-23T19:30:00Z",
+    "reference_id": "SMS26102301",
+    "user_id": "synthetic_user_1"
+  },
+  {
+    "message": "INR 580.00 spent at SWIGGY LIMITED.",
+    "timestamp": "2026-10-26T21:00:00Z",
+    "reference_id": "SMS26102601",
+    "user_id": "synthetic_user_1"
+  },
+  {
+    "message": "Rs. 280.00 debited at METRO.",
+    "timestamp": "2026-10-28T08:00:00Z",
+    "reference_id": "SMS26102801",
+    "user_id": "synthetic_user_1"
+  },
+  {
+    "message": "INR 950.00 debited from a/c at SWIGGY.",
+    "timestamp": "2026-11-02T13:20:00Z",
+    "reference_id": "SMS26110201",
+    "user_id": "synthetic_user_1"
+  },
+  {
+    "message": "Rs. 320.00 spent at UBER INDIA.",
+    "timestamp": "2026-11-04T10:10:00Z",
+    "reference_id": "SMS26110401",
+    "user_id": "synthetic_user_1"
+  },
+  {
+    "message": "INR 6,200.00 debited towards AMAZON SELLER.",
+    "timestamp": "2026-11-06T16:00:00Z",
+    "reference_id": "SMS26110601",
+    "user_id": "synthetic_user_1"
+  },
+  {
+    "message": "Rs. 1,100.00 received towards Cashback.",
+    "timestamp": "2026-11-08T11:30:00Z",
+    "reference_id": "SMS26110801",
+    "user_id": "synthetic_user_1"
+  },
+  {
+    "message": "INR 790.00 debited at ZOMATO.",
+    "timestamp": "2026-11-10T20:45:00Z",
+    "reference_id": "SMS26111001",
+    "user_id": "synthetic_user_1"
+  },
+  {
+    "message": "Rs. 450.00 spent at BLINKIT.",
+    "timestamp": "2026-11-12T15:15:00Z",
+    "reference_id": "SMS26111201",
+    "user_id": "synthetic_user_1"
+  },
+  {
+    "message": "Your a/c is credited with Rs. 60,000.00 towards Salary.",
+    "timestamp": "2026-10-31T11:00:00Z",
+    "reference_id": "SAL261031U2",
+    "user_id": "synthetic_user_2"
+  },
+  {
+    "message": "INR 1,200.00 debited from a/c at AMAZON INDIA.",
+    "timestamp": "2026-11-03T14:00:00Z",
+    "reference_id": "SMS261103U2",
+    "user_id": "synthetic_user_2"
+  },
+  {
+    "message": "Rs. 420.00 spent at SWIGGY.",
+    "timestamp": "2026-11-09T19:00:00Z",
+    "reference_id": "SMS261109U2",
+    "user_id": "synthetic_user_2"
+  }
+]

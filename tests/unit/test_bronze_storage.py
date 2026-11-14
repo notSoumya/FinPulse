@@ -1,4 +1,3 @@
-
 import json
 from datetime import UTC, datetime
 from pathlib import Path
@@ -12,9 +11,7 @@ from finpulse.bronze.storage import BronzeStorage
 def valid_event():
     return {
         "event_id": "event_001",
-        "event_timestamp": datetime(
-            2026, 11, 9, 10, 30, tzinfo=UTC
-        ).isoformat(),
+        "event_timestamp": datetime(2026, 11, 9, 10, 30, tzinfo=UTC).isoformat(),
         "schema_version": "1.0",
         "event_type": "TRANSACTION_CREATED",
         "payload": {
@@ -64,12 +61,7 @@ def test_event_is_stored_in_correct_partition(tmp_path, valid_event):
     storage.write_event(valid_event)
 
     expected = (
-        Path(tmp_path)
-        / "source_type=MANUAL"
-        / "year=2026"
-        / "month=11"
-        / "day=09"
-        / "events.jsonl"
+        Path(tmp_path) / "source_type=MANUAL" / "year=2026" / "month=11" / "day=09" / "events.jsonl"
     )
 
     assert expected.exists()
@@ -98,6 +90,7 @@ def test_timezone_is_required(tmp_path, valid_event):
     with pytest.raises(ValueError, match="timezone"):
         storage.write_event(valid_event)
 
+
 def test_event_is_partitioned_using_utc(tmp_path, valid_event):
     storage = BronzeStorage(tmp_path)
 
@@ -107,15 +100,11 @@ def test_event_is_partitioned_using_utc(tmp_path, valid_event):
     storage.write_event(valid_event)
 
     expected = (
-        Path(tmp_path)
-        / "source_type=MANUAL"
-        / "year=2026"
-        / "month=11"
-        / "day=09"
-        / "events.jsonl"
+        Path(tmp_path) / "source_type=MANUAL" / "year=2026" / "month=11" / "day=09" / "events.jsonl"
     )
 
     assert expected.exists()
+
 
 def test_invalid_timestamp_is_rejected(tmp_path, valid_event):
     storage = BronzeStorage(tmp_path)
@@ -123,6 +112,7 @@ def test_invalid_timestamp_is_rejected(tmp_path, valid_event):
 
     with pytest.raises(ValueError, match="Invalid event_timestamp"):
         storage.write_event(valid_event)
+
 
 def test_missing_payload_is_rejected(tmp_path, valid_event):
     storage = BronzeStorage(tmp_path)

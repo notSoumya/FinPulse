@@ -1,0 +1,8 @@
+finpulse:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "{{ env_var('FINPULSE_DUCKDB_PATH', 'data/warehouse/finpulse.duckdb') }}"
+      schema: main
+
