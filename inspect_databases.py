@@ -1,6 +1,7 @@
 
-import duckdb
 from pathlib import Path
+
+import duckdb
 
 databases = [
     Path("data/synthetic/warehouse/finpulse_synthetic.duckdb"),

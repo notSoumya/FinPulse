@@ -11,8 +11,17 @@ Executes:
 7. Saves data/synthetic/reports/analytics_reconciliation.json
 """
 
+# ruff: noqa: E402
 import json
-import sys, os
+import logging
+import os
+import shutil
+import sys
+from collections import defaultdict
+from datetime import UTC, datetime
+from decimal import Decimal
+from pathlib import Path
+
 # Ensure repository root is on PYTHONPATH for top-level package imports
 repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 # Also add the src directory where the finpulse package lives
@@ -21,13 +30,6 @@ if src_root not in sys.path:
     sys.path.append(src_root)
 if repo_root not in sys.path:
     sys.path.append(repo_root)
-import logging
-import os
-import shutil
-from collections import defaultdict
-from datetime import UTC, datetime
-from decimal import Decimal
-from pathlib import Path
 
 import duckdb
 from dbt.cli.main import dbtRunner
