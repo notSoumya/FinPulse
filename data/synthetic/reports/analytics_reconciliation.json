@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-13T23:54:32.927480",
+  "timestamp": "2026-11-14T01:44:23.192133",
   "primary_user": "synthetic_user_1",
   "overall_status": "PASS",
   "pipeline_execution": {
@@ -20,7 +20,9 @@
     "duckdb_rows_synced": 120,
     "dbt_models_passed": 7,
     "dbt_tests_passed": 27,
-    "quarantined_records": 2
+    "quarantined_records": 2,
+    "ml_anomalies_detected": 20,
+    "ml_high_severity_count": 2
   },
   "independent_expected_totals": {
     "user_id": "synthetic_user_1",

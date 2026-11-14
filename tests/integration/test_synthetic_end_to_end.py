@@ -113,6 +113,67 @@ def test_dashboard_queries_against_synthetic_warehouse(synthetic_env):
     assert kpis["savings_rate_pct"] == pytest.approx(47.1, 0.01)
 
 
+def test_anomaly_detection_pipeline_execution(synthetic_env):
+    report = synthetic_env["pipeline_report"]
+    exec_stats = report["pipeline_execution"]
+    assert exec_stats["ml_anomalies_detected"] > 0
+    assert exec_stats["ml_high_severity_count"] >= 1
+
+    warehouse_db = Path("data/synthetic/warehouse/finpulse_synthetic.duckdb")
+    with duckdb.connect(str(warehouse_db)) as con:
+        anom_count = con.execute("SELECT count(*) FROM silver.anomalies").fetchone()[0]
+        assert anom_count == 120
+        high_count = con.execute(
+            "SELECT count(*) FROM silver.anomalies WHERE severity = 'High'"
+        ).fetchone()[0]
+        assert high_count >= 1
+
+
+def test_anomaly_dashboard_queries(synthetic_env):
+    warehouse_db = Path("data/synthetic/warehouse/finpulse_synthetic.duckdb")
+    from dashboard.queries import (
+        get_anomaly_distributions,
+        get_anomaly_investigation_records,
+        get_anomaly_kpis,
+        get_anomaly_normal_comparison,
+        get_anomaly_timeline,
+        get_financial_insights,
+    )
+
+    kpis = get_anomaly_kpis(user_id="synthetic_user_1", currency="INR", db_path=warehouse_db)
+    assert kpis["total_evaluated"] == 106
+    assert kpis["total_anomalies"] > 0
+    assert kpis["high_severity_count"] >= 1
+
+    timeline = get_anomaly_timeline(
+        user_id="synthetic_user_1", currency="INR", db_path=warehouse_db
+    )
+    assert not timeline.empty
+
+    dist = get_anomaly_distributions(
+        "category", user_id="synthetic_user_1", currency="INR", db_path=warehouse_db
+    )
+    assert not dist.empty
+
+    records, total = get_anomaly_investigation_records(
+        user_id="synthetic_user_1", currency="INR", db_path=warehouse_db
+    )
+    assert total > 0
+    assert len(records) > 0
+    assert "primary_reason" in records.columns
+
+    comparison = get_anomaly_normal_comparison(
+        user_id="synthetic_user_1", currency="INR", db_path=warehouse_db
+    )
+    assert comparison["normal_count"] > 0
+    assert comparison["anomalous_count"] > 0
+
+    insights = get_financial_insights(
+        user_id="synthetic_user_1", currency="INR", db_path=warehouse_db
+    )
+    assert len(insights) >= 3
+
+
 def test_edge_cases_and_malformed_inputs(tmp_path):
     # 1. Missing mandatory field in manual transaction
     with pytest.raises(Exception):

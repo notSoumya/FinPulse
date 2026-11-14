@@ -13,6 +13,7 @@ from dashboard.database import is_database_available
 from dashboard.queries import (
     get_category_spending,
     get_daily_spending_trend,
+    get_financial_insights,
     get_merchant_spending,
     get_overview_kpis,
 )
@@ -33,11 +34,38 @@ kpis = get_overview_kpis(
     start_date=filters["start_date"],
     end_date=filters["end_date"],
     user_id=filters["user_id"],
+    category=filters.get("category"),
+    source_type=filters.get("source_type"),
+    direction=filters.get("direction"),
+    merchant=filters.get("merchant"),
     currency=currency,
 )
 
 # Render KPI Cards
 render_kpi_cards(kpis, currency=currency)
+
+# Section D: Dynamic Financial Insights
+st.markdown("---")
+st.subheader("💡 Strategic Financial Insights")
+insights = get_financial_insights(user_id=filters["user_id"], currency=currency)
+
+if insights:
+    cols = st.columns(min(len(insights), 3))
+    for i, ins in enumerate(insights[:3]):
+        with cols[i]:
+            if ins["type"] == "warning":
+                st.warning(f"**{ins['title']}**\n\n{ins['text']}")
+            elif ins["type"] == "success":
+                st.success(f"**{ins['title']}**\n\n{ins['text']}")
+            else:
+                st.info(f"**{ins['title']}**\n\n{ins['text']}")
+
+    if len(insights) > 3:
+        with st.expander("🔎 View Additional Trajectory Insights"):
+            for ins in insights[3:]:
+                st.markdown(f"- **{ins['title']}**: {ins['text']}")
+else:
+    st.caption("Insights will generate as transactions are recorded across multiple months.")
 
 st.markdown("---")
 
@@ -46,6 +74,8 @@ df_daily = get_daily_spending_trend(
     start_date=filters["start_date"],
     end_date=filters["end_date"],
     user_id=filters["user_id"],
+    category=filters.get("category"),
+    source_type=filters.get("source_type"),
     currency=currency,
 )
 
@@ -53,6 +83,7 @@ df_cat = get_category_spending(
     start_date=filters["start_date"],
     end_date=filters["end_date"],
     user_id=filters["user_id"],
+    source_type=filters.get("source_type"),
     currency=currency,
 )
 

@@ -1,4 +1,5 @@
 import json
+import time
 from pathlib import Path
 
 
@@ -66,4 +67,11 @@ class CheckpointManager:
             )
             file.flush()
 
-        temporary_path.replace(self.checkpoint_path)
+        for attempt in range(5):
+            try:
+                temporary_path.replace(self.checkpoint_path)
+                break
+            except (PermissionError, OSError):
+                if attempt == 4:
+                    raise
+                time.sleep(0.05 * (attempt + 1))

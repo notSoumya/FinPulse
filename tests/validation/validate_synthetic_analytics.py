@@ -12,6 +12,15 @@ Executes:
 """
 
 import json
+import sys, os
+# Ensure repository root is on PYTHONPATH for top-level package imports
+repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+# Also add the src directory where the finpulse package lives
+src_root = os.path.abspath(os.path.join(repo_root, "src"))
+if src_root not in sys.path:
+    sys.path.append(src_root)
+if repo_root not in sys.path:
+    sys.path.append(repo_root)
 import logging
 import os
 import shutil
@@ -255,6 +264,20 @@ def run_synthetic_pipeline_and_validate(base_dir_str: str = "data/synthetic") ->
     test_res = dbt.invoke(["test", "--project-dir", "dbt", "--profiles-dir", "dbt"])
     assert test_res.success, f"dbt data tests failed: {test_res.exception}"
     logger.info("dbt tests passed: %d tests passed.", len(test_res.result))
+
+    logger.info("==================================================")
+    logger.info("STAGE 5B: ML Anomaly Detection Training & Scoring")
+    logger.info("==================================================")
+
+    from ml.pipeline import run_anomaly_pipeline
+
+    ml_res = run_anomaly_pipeline(warehouse_db, model_dir=base_dir / "models" / "anomaly_detection")
+    logger.info(
+        "ML anomaly pipeline executed: %d scored, %d anomalies detected (%d high severity).",
+        ml_res["transactions_scored"],
+        ml_res["anomalies_detected"],
+        ml_res["high_severity_count"],
+    )
 
     logger.info("==================================================")
     logger.info("STAGE 6: Independent Financial Analytics Calculation")
@@ -502,6 +525,8 @@ def run_synthetic_pipeline_and_validate(base_dir_str: str = "data/synthetic") ->
             "dbt_models_passed": len(run_res.result),
             "dbt_tests_passed": len(test_res.result),
             "quarantined_records": quarantine_count,
+            "ml_anomalies_detected": ml_res["anomalies_detected"],
+            "ml_high_severity_count": ml_res["high_severity_count"],
         },
         "independent_expected_totals": expected_analytics,
         "reconciliation": reconciliation_items,

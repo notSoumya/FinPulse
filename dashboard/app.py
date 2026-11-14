@@ -73,7 +73,7 @@ else:
 
     st.markdown("---")
     st.markdown("### 🧭 Navigation Guide")
-    nav1, nav2, nav3, nav4 = st.columns(4)
+    nav1, nav2, nav3, nav4, nav5 = st.columns(5)
     with nav1:
         st.markdown("**1. Financial Overview**")
         st.caption("Complete income, expense, cash flow, and trend snapshot.")
@@ -86,3 +86,6 @@ else:
     with nav4:
         st.markdown("**4. Transaction Explorer**")
         st.caption("Search, filter, and inspect individual curated transactions.")
+    with nav5:
+        st.markdown("**5. Anomaly Detection**")
+        st.caption("ML Isolation Forest anomaly scoring and explainability.")
